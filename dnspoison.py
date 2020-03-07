@@ -34,9 +34,14 @@ def main(argv):
     EXPRESSION = " ".join(map(str, args))
     #open hostfile and put it into dictionary
     try:
-    	with open(HOSTFILE, "r") as f:
-    		hosts = f.readlines()
-        retval = poison(iface=INTERFACE, hosts=hosts, expression=EXPRESSION)
+    	if HOSTFILE:
+	    	with open(HOSTFILE, "r") as f:
+	    		hosts = f.readlines()
+    	poison(iface=INTERFACE, hosts=hosts, expression=EXPRESSION)
+    	raise KeyboardInterrupt
+    except KeyboardInterrupt:
+        print("Finished spoofing packets from interface.")
+        retval = 0
     except (OSError, IOError) as e:
     	print(e, file=sys.stderr)
     	print("DnsPoison: Unable to read the hostnames file '%s'" % HOSTFILE, file=sys.stderr)
