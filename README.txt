@@ -24,7 +24,7 @@ dnspoison.py [-i interface] [-f hostnames] expression
   
 If neither flag is specified, dnspoison.py will sniff packets from a network interface and forge dns responses with the local machine's IP address as an answer.
 
-To see results, see test directory
+To see results, see test directory and dns.pcap
   
 Example output:
 
